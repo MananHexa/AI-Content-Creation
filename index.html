@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-robot"></i> AI Content Generator</h1>
+            <p>Generate engaging content for various topics using AI</p>
+        </header>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2>Content Request</h2>
+                
+                <div class="sample-buttons">
+                    <h3>Content Categories</h3>
+                    <div class="button-grid">
+                        <button class="sample-btn" data-template="sports">
+                            <i class="fas fa-running"></i>
+                            Sports
+                        </button>
+                        <button class="sample-btn" data-template="yoga">
+                            <i class="fas fa-pray"></i>
+                            Yoga
+                        </button>
+                        <button class="sample-btn" data-template="cloud-computing">
+                            <i class="fas fa-cloud"></i>
+                            Cloud Computing
+                        </button>
+                        <button class="sample-btn" data-template="healthy-lifestyle">
+                            <i class="fas fa-heart"></i>
+                            Healthy Lifestyle
+                        </button>
+                        <button class="sample-btn" data-template="technology">
+                            <i class="fas fa-microchip"></i>
+                            Technology
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPrompt">Your Content Request (Highest Priority):</label>
+                    <textarea id="userPrompt" placeholder="Describe what content you want to generate..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="userRecentPosts">My Recent Posts (Second Priority):</label>
+                    <textarea id="userRecentPosts" placeholder="Share your recent posts or content ideas..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="userBio">Your Bio/Profile (Third Priority):</label>
+                    <textarea id="userBio" placeholder="Tell us about yourself, your expertise, or your brand..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="platform">Target Platform:</label>
+                    <select id="platform">
+                        <option value="all">All Platforms</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="twitter">Twitter</option>
+                    </select>
+                </div>
+
+                <button id="generateBtn" class="generate-btn">
+                    <i class="fas fa-magic"></i>
+                    Generate Content
+                </button>
+            </div>
+
+            <div class="output-section">
+                <h2>Generated Content</h2>
+                <div id="output" class="output-content">
+                    <div class="placeholder">
+                        <i class="fas fa-lightbulb"></i>
+                        <p>Click on a content category or enter your own prompt to generate content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
