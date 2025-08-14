@@ -51,8 +51,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="userRecentPosts">My Recent Posts (Second Priority):</label>
-                    <textarea id="userRecentPosts" placeholder="Share your recent posts or content ideas..."></textarea>
+                    <label>My Recent Posts (Second Priority):</label>
+                    <div class="recent-posts-container">
+                        <div class="recent-post-item">
+                            <label>Recent Post 1:</label>
+                            <textarea class="recent-post-input" placeholder="Share your first recent post..."></textarea>
+                        </div>
+                        <div class="recent-post-item">
+                            <label>Recent Post 2:</label>
+                            <textarea class="recent-post-input" placeholder="Share your second recent post..."></textarea>
+                        </div>
+                        <div class="recent-post-item">
+                            <label>Recent Post 3:</label>
+                            <textarea class="recent-post-input" placeholder="Share your third recent post..."></textarea>
+                        </div>
+                        <div class="recent-post-item">
+                            <label>Recent Post 4:</label>
+                            <textarea class="recent-post-input" placeholder="Share your fourth recent post..."></textarea>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -61,15 +78,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="platform">Target Platform:</label>
-                    <select id="platform">
-                        <option value="all">All Platforms</option>
-                        <option value="facebook">Facebook</option>
-                        <option value="instagram">Instagram</option>
-                        <option value="linkedin">LinkedIn</option>
-                        <option value="youtube">YouTube</option>
-                        <option value="twitter">Twitter</option>
-                    </select>
+                    <label>Select Platforms:</label>
+                    <div class="platform-checkboxes">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="facebook" value="facebook">
+                            <label for="facebook"><i class="fab fa-facebook"></i> Facebook</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="instagram" value="instagram">
+                            <label for="instagram"><i class="fab fa-instagram"></i> Instagram</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="linkedin" value="linkedin">
+                            <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="youtube" value="youtube">
+                            <label for="youtube"><i class="fab fa-youtube"></i> YouTube</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="twitter" value="twitter">
+                            <label for="twitter"><i class="fab fa-twitter"></i> Twitter</label>
+                        </div>
+                    </div>
                 </div>
 
                 <button id="generateBtn" class="generate-btn">

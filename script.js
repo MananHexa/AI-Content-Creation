@@ -11,6 +11,12 @@ const sampleTemplates = {
     context:
       "Focus on fitness motivation, workout tips, and the mental benefits of sports. Include actionable advice for beginners.",
     bio: "🏃‍♂️ Fitness Coach & Sports Enthusiast | Helping people achieve their health goals through sustainable exercise routines | Certified Personal Trainer | Marathon Runner | Building a community of motivated individuals 💪",
+    recentPosts: [
+      "Just completed my 10th marathon! 🏃‍♂️ Remember, every step counts towards your goals. What's your next fitness milestone? #MarathonLife #FitnessGoals #NeverGiveUp",
+      "Pro tip: Start your workout with 5 minutes of dynamic stretching. It's the difference between a good workout and a great one! 💪 #FitnessTips #WorkoutRoutine #HealthyLiving",
+      "The best workout is the one you actually do! Don't overthink it - just start moving. What's your favorite quick workout? 🏋️‍♀️ #FitnessMotivation #QuickWorkout #StayActive",
+      "Fitness isn't about being perfect, it's about being consistent. Small changes lead to big results over time! 🌟 #FitnessJourney #Consistency #HealthyHabits",
+    ],
   },
   yoga: {
     prompt:
@@ -18,6 +24,12 @@ const sampleTemplates = {
     context:
       "Target people looking for stress relief and mental wellness. Include beginner-friendly yoga poses and breathing techniques.",
     bio: "🧘‍♀️ Yoga Instructor & Wellness Coach | 10+ years helping people find inner peace through mindfulness | RYT-500 Certified | Stress Management Expert | Creating a calmer world, one breath at a time ✨",
+    recentPosts: [
+      "Take a deep breath right now. Feel that? That's your body's natural reset button. Use it often! 🧘‍♀️ #Mindfulness #Breathing #StressRelief #YogaLife",
+      "Morning yoga flow: 3 sun salutations, 5 minutes of meditation, and a grateful heart. Start your day with intention! ☀️ #MorningRoutine #YogaFlow #MindfulLiving",
+      "Yoga isn't about touching your toes, it's about what you learn on the way down. Every pose teaches patience and presence. 🌿 #YogaWisdom #Mindfulness #PersonalGrowth",
+      "When life gets overwhelming, remember: you can always come back to your breath. It's your anchor in any storm. 🧘‍♂️ #StressRelief #Breathing #MentalHealth #YogaTherapy",
+    ],
   },
   "cloud-computing": {
     prompt:
@@ -25,6 +37,12 @@ const sampleTemplates = {
     context:
       "Make it accessible for beginners while being informative for tech professionals. Include practical examples and future predictions.",
     bio: "☁️ Cloud Solutions Architect | 8+ years in cloud computing & DevOps | AWS, Azure, GCP Certified | Helping businesses scale with cloud technology | Tech Mentor & Speaker | Building the future of digital infrastructure 🚀",
+    recentPosts: [
+      "Cloud computing isn't just a trend, it's the future of business. Companies that don't adapt will be left behind. What's your cloud strategy? ☁️ #CloudComputing #DigitalTransformation #TechTrends",
+      "Just deployed a multi-cloud solution that reduced costs by 40%! The key? Right-sizing and automation. Cloud optimization is everything! 💰 #CloudOptimization #CostSavings #DevOps",
+      "Serverless computing is changing how we build applications. No more managing servers, just focus on your code! 🚀 #Serverless #CloudComputing #Innovation #TechFuture",
+      "The cloud skills gap is real. If you're not learning cloud technologies in 2025, you're falling behind. Start with AWS basics! 📚 #CloudSkills #CareerGrowth #TechEducation #AWS",
+    ],
   },
   "healthy-lifestyle": {
     prompt:
@@ -32,6 +50,12 @@ const sampleTemplates = {
     context:
       "Focus on practical, achievable tips that can be implemented daily. Include science-backed information and personal success stories.",
     bio: "🌟 Holistic Health Coach & Nutritionist | Transforming lives through sustainable wellness practices | Certified Health Coach | Plant-based Nutrition Expert | Helping busy professionals prioritize their health 🌱",
+    recentPosts: [
+      "Your health is an investment, not an expense. Small daily choices compound into massive results over time! 💪 #HealthInvestment #Wellness #HealthyChoices #LongTermHealth",
+      "Just meal prepped for the week! Batch cooking saves time, money, and ensures healthy choices. What's your meal prep strategy? 🥗 #MealPrep #HealthyEating #TimeSaving #Nutrition",
+      "Quality sleep is the foundation of good health. Create a bedtime routine and stick to it. Your body will thank you! 😴 #SleepHealth #BedtimeRoutine #Wellness #HealthTips",
+      "Mental health is just as important as physical health. Take 5 minutes today to practice gratitude or meditation. Your mind needs care too! 🧠 #MentalHealth #SelfCare #Mindfulness #Wellness",
+    ],
   },
   technology: {
     prompt:
@@ -39,16 +63,26 @@ const sampleTemplates = {
     context:
       "Explain complex tech concepts in simple terms. Include real-world examples and how these technologies affect everyday life.",
     bio: "🚀 Tech Innovation Consultant & AI Researcher | Exploring the future of technology | 12+ years in software development | AI/ML Specialist | Digital Transformation Expert | Making tech accessible to everyone 💻",
+    recentPosts: [
+      "AI isn't replacing humans, it's augmenting us. The future belongs to those who learn to work alongside intelligent machines! 🤖 #AI #FutureOfWork #Innovation #TechTrends",
+      "Just implemented an AI chatbot that handles 80% of customer queries. The result? Happier customers and more efficient support! 💬 #AIImplementation #CustomerService #Automation #TechSuccess",
+      "Digital transformation isn't optional anymore. Companies that don't embrace technology will be disrupted by those who do. What's your digital strategy? 🌐 #DigitalTransformation #Innovation #BusinessStrategy #TechLeadership",
+      "The metaverse is coming, and it's bigger than social media. Start learning about VR/AR now to stay ahead of the curve! 🥽 #Metaverse #VR #AR #FutureTech #Innovation",
+    ],
   },
 };
 
 // DOM elements
 const userPromptInput = document.getElementById("userPrompt");
-const userRecentPostsInput = document.getElementById("userRecentPosts");
 const userBioInput = document.getElementById("userBio");
-const platformSelect = document.getElementById("platform");
 const generateBtn = document.getElementById("generateBtn");
 const outputDiv = document.getElementById("output");
+
+// Platform checkboxes
+const platformCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+
+// Recent post inputs
+const recentPostInputs = document.querySelectorAll(".recent-post-input");
 
 // Event listeners
 document.addEventListener("DOMContentLoaded", function () {
@@ -62,26 +96,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Generate button click handler
   generateBtn.addEventListener("click", generateContent);
+
+  // Add clear all fields functionality
+  addClearAllButton();
 });
+
+// Add clear all button functionality
+function addClearAllButton() {
+  const clearBtn = document.createElement("button");
+  clearBtn.innerHTML = '<i class="fas fa-eraser"></i> Clear All';
+  clearBtn.className = "clear-btn";
+  clearBtn.addEventListener("click", clearAllFields);
+
+  // Insert after the generate button
+  generateBtn.parentNode.insertBefore(clearBtn, generateBtn.nextSibling);
+}
+
+// Clear all input fields
+function clearAllFields() {
+  userPromptInput.value = "";
+  userBioInput.value = "";
+  recentPostInputs.forEach((input) => (input.value = ""));
+  platformCheckboxes.forEach((checkbox) => (checkbox.checked = false));
+
+  showNotification("All fields cleared!", "success");
+}
 
 // Load sample template
 function loadSampleTemplate(templateType) {
   const template = sampleTemplates[templateType];
   if (template) {
     userPromptInput.value = template.prompt;
-    userRecentPostsInput.value = template.context; // Load context from template
     userBioInput.value = template.bio; // Load bio from template
 
-    // Auto-select appropriate platform and tone based on category
+    // Load recent posts from template
+    if (template.recentPosts) {
+      template.recentPosts.forEach((post, index) => {
+        if (recentPostInputs[index]) {
+          recentPostInputs[index].value = post;
+        }
+      });
+    }
+
+    // Clear all platform checkboxes first
+    platformCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    // Auto-select appropriate platform based on category
     if (templateType === "cloud-computing" || templateType === "technology") {
-      platformSelect.value = "linkedin";
+      // Select LinkedIn for professional content
+      document.getElementById("linkedin").checked = true;
     } else if (
       templateType === "yoga" ||
       templateType === "healthy-lifestyle"
     ) {
-      platformSelect.value = "instagram";
+      // Select Instagram for lifestyle content
+      document.getElementById("instagram").checked = true;
     } else {
-      platformSelect.value = "all";
+      // Select Facebook for general content
+      document.getElementById("facebook").checked = true;
     }
 
     // Show success message
@@ -93,11 +167,11 @@ function loadSampleTemplate(templateType) {
 async function generateContent() {
   let prompt = userPromptInput.value.trim();
   let bio = userBioInput.value.trim();
-  let context = userRecentPostsInput.value.trim();
-  const platform = platformSelect.value;
+  let context = getRecentPosts();
+  const platform = getSelectedPlatform();
 
-  if (!prompt && !context && !bio) {
-    prompt = `Create engaging ${platform} posts based on these trending topics in India`;
+  if (!prompt && !bio) {
+    prompt = `Create engaging posts based on these trending topics in India`;
   }
 
   showLoading();
@@ -112,6 +186,18 @@ async function generateContent() {
   } finally {
     hideLoading();
   }
+}
+
+// Get recent posts from all input fields
+function getRecentPosts() {
+  const posts = [];
+  recentPostInputs.forEach((input, index) => {
+    const post = input.value.trim();
+    if (post) {
+      posts.push(`Post ${index + 1}: ${post}`);
+    }
+  });
+  return posts.join("\n");
 }
 
 // Call OpenAI API
@@ -346,6 +432,24 @@ function getTemplateTypeFromPrompt(prompt) {
     return "technology";
   } else {
     return "generic"; // Default to generic for any industry
+  }
+}
+
+// Get selected platform from checkboxes
+function getSelectedPlatform() {
+  const selectedPlatforms = [];
+  platformCheckboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      selectedPlatforms.push(checkbox.value);
+    }
+  });
+
+  if (selectedPlatforms.length === 0) {
+    return "all";
+  } else if (selectedPlatforms.length === 1) {
+    return selectedPlatforms[0];
+  } else {
+    return selectedPlatforms.join(", ");
   }
 }
 
